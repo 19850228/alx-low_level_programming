@@ -1,6 +1,6 @@
 #include <stdio.h>
 /**
-* main -  persistence and perspiration make an unbeatable combination for success
+* main -  persistence and perspiration make an unbeatable
 * Return: 0
 */
 int main(void)

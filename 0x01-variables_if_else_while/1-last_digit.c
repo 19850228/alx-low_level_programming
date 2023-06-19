@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 /**
-* main - The variable n will store a different value every time you run this program
+* main - The variable n will store a different value 
 * Return: 0
 */
 int main(void)

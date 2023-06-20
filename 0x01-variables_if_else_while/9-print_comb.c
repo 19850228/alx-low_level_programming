@@ -1,16 +1,20 @@
 #include <stdio.h>
 /**
-* main -  persistence and perspiration make an unbeatable
+* main - Numbers should be printed in ascending order
 * Return: 0
 */
 int main(void)
 {
-int d;
-for (d = 0; d <= 9; d++)
-putchar(d);
-if (d != '9')
+int digit = 0;
+while (digit <= 9)
+{
+putchar(digit + 48);
+if (digit != 9)		{
 putchar(',');
 putchar(' ');
+}
+++digit;
+{
 putchar('\n');
 return (0);
 }

@@ -1,8 +1,9 @@
 #include"main.h"
 /**
-* main - Write a program that computes and prints 
+* main - Entry point
 *
-* Description: computes the sum of all the multiple of 3 and 5
+* Description: computes the sum of all the multiple of 3 or 5
+*
 * Return: Always 0 (Success)
 */
 int main(void)

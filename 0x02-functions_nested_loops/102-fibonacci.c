@@ -1,8 +1,9 @@
-#include "main.h"
+#include"main.h"
 /**
-* main - You are allowed to use the standard library
-* 
-* Return: 0 (Success)
+* main - The numbers must be separated by comma
+*
+* Description: prints the first 50 Fibonacci numbers starting with 1 and 2
+* Return: Always 0 (Success)
 */
 int main(void)
 {

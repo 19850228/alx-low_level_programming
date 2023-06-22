@@ -1,4 +1,3 @@
-
 #include "main.h"
 #include <stdio.h>
 /**
@@ -26,8 +25,7 @@ printf(" FizzBuzz");
 printf("%d", i);
 } else
 {
-printf(" %d", i);
-}
+printf(" %d", i);		}
 }
 printf("\n");
 return (0);

@@ -1,6 +1,6 @@
-#include."main.h"
+#include "main.h"
 /**
-* main - check the code for student 
+* main - check the code
 *
 * Return: Always 0.
 */
@@ -12,5 +12,3 @@ print_line(10);
 print_line(-4);
 return (0);
 }
-
-

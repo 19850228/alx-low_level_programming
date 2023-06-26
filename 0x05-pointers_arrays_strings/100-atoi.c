@@ -1,5 +1,6 @@
 /**
 * _atoi - converts a string to an integer
+*
 * @s: string input parameter
 *
 * Return: converted integer from string
@@ -18,4 +19,3 @@ break;
 } while (*s++);
 return (num * sign);
 }
-

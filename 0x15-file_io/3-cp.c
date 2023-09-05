@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-*create_buffer(char *file);
+char *create_buffer(char *file);
 void close_file(int fd);
 
 /**

@@ -1,57 +1,40 @@
 #include "lists.h"
 
-
 /**
- * add_dnodeint_end - Adds a new node at the end of a dlistint_t list.
- * @head: A pointer to the head of the dlistint_t list.
- * @n: The integer for the new node to contain.
- *
- * Return: If the function fails - NULL.
- *         Otherwise - the address of the new node.
+ * add_dnodeint_end - Adds a new node at the end of a dlistint_t list
+ * @head: Pointer to the head of the list
+ * @n: Value to be assigned to the new node
+ * Return: The address of the new element, or NULL if it failed
  */
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
-    /*Declare new node pointers.*/
-    dlistint_t *new, *last;
+    dlistint_t *new_node, *temp;
 
+    /* Allocate memory for the new node */
+    new_node = malloc(sizeof(dlistint_t));
+    if (new_node == NULL)
+        return NULL;
 
-    /*Allocate memory for the new node.*/
-    new = malloc(sizeof(dlistint_t));
-    /*Check if memory allocation failed*/
-    if (new == NULL)
-        /*Return NULL if allocation failed.*/
-        return (NULL);
+    /* Assign values to the new node */
+    new_node->n = n;
+    new_node->next = NULL;
 
-
-    /*Set the value of the new node to the provided integer.*/
-    new->n = n;
-    /*Set the next pointer of the new node to NULL.*/
-    new->next = NULL;
-
-
-    /*Check if the list is empty.*/
+    /* If the list is empty, make the new node the head */
     if (*head == NULL)
     {
-        /*Set the previous pointer of the new node to NULL.*/
-        new->prev = NULL;
-        /*Update the head pointer to point to the new node.*/
-        *head = new;
-        /*Return the address of the new node.*/
-        return (new);
+        new_node->prev = NULL;
+        *head = new_node;
+        return new_node;
     }
 
+    /* Traverse the list to find the last node */
+    temp = *head;
+    while (temp->next != NULL)
+        temp = temp->next;
 
-    /*Initialize a pointer to traverse the list.*/
-    last = *head;
-    /*Find the last node in the list.*/
-    while (last->next != NULL)
-        last = last->next;
-    /*Set the next pointer of the last node to the new node.*/
-    last->next = new;
-    /*Set the previous pointer of the new node to the last node.*/
-    new->prev = last;
+    /* Update the pointers to add the new node at the end */
+    new_node->prev = temp;
+    temp->next = new_node;
 
-
-    /*Return the address of the new node.*/
-    return (new);
+    return new_node;
 }

@@ -1,46 +1,48 @@
 #include "lists.h"
 
-/*
- * delete_dnodeint_at_index - Deletes a node from a dlistint_t
- *                            at a given index.
- * @head: A pointer to the head of the dlistint_t.
- * @index: The index of the node to delete.
- *
- * Return: Upon success - 1.
- *         Otherwise - -1.
+/**
+ * delete_dnodeint_at_index - Deletes the node at index of a dlistint_t list
+ * @head: Pointer to the head of the list
+ * @index: Index of the node to be deleted
+ * Return: 1 if it succeeded, -1 if it failed
  */
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-    dlistint_t *tmp = *head;
+    dlistint_t *temp, *prev;
+    unsigned int i;
 
-    /* If the list is empty, return -1 indicating failure. */
+    /* Check if the list is empty */
     if (*head == NULL)
-        return (-1);
+        return -1;
 
-    /* Traverse the list to reach the desired index. */
-    for (; index != 0; index--)
+    /* If deleting the first node, update the head */
+    if (index == 0)
     {
-        if (tmp == NULL)
-            return (-1);
-        tmp = tmp->next;
-    }
-
-    /* If the node to delete is the head node. */
-    if (tmp == *head)
-    {
-        *head = tmp->next;
+        temp = *head;
+        *head = temp->next;
         if (*head != NULL)
             (*head)->prev = NULL;
-    }
-    /* If the node to delete is not the head node. */
-    else
-    {
-        tmp->prev->next = tmp->next;
-        if (tmp->next != NULL)
-            tmp->next->prev = tmp->prev;
+        free(temp);
+        return 1;
     }
 
-    /* Free the memory of the deleted node. */
-    free(tmp);
-    return (1);
+    /* Traverse the list to find the node at position index */
+    temp = *head;
+    for (i = 0; i < index && temp != NULL; i++)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    /* If the index is out of bounds, return -1 */
+    if (temp == NULL)
+        return -1;
+
+    /* Update pointers to delete the node */
+    prev->next = temp->next;
+    if (temp->next != NULL)
+        temp->next->prev = prev;
+    free(temp);
+
+    return 1;
 }

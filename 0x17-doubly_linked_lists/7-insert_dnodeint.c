@@ -1,46 +1,54 @@
 #include "lists.h"
 
-/*
- * insert_dnodeint_at_index - Inserts a new node in a dlistint_t
- *                            list at a given position.
- * @h: A pointer to the head of the dlistint_t list.
- * @idx: The position to insert the new node.
- * @n: The integer for the new node to contain.
- *
- * Return: If the function fails - NULL.
- *         Otherwise - the address of the new node.
+/**
+ * insert_dnodeint_at_index - Inserts a new node at a given position
+ * @h: Pointer to the head of the list
+ * @idx: Index where the new node should be added
+ * @n: Value to be assigned to the new node
+ * Return: The address of the new node, or NULL if it failed
  */
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-    dlistint_t *tmp = *h, *new;
+    dlistint_t *new_node, *temp;
+    unsigned int i;
 
-    /* If the index is 0, insert at the beginning of the list. */
+    /* Allocate memory for the new node */
+    new_node = malloc(sizeof(dlistint_t));
+    if (new_node == NULL)
+        return NULL;
+
+    /* Assign values to the new node */
+    new_node->n = n;
+
+    /* If inserting at the beginning, update the head */
     if (idx == 0)
-        return (add_dnodeint(h, n));
-
-    /* Traverse the list to reach the desired position. */
-    for (; idx != 1; idx--)
     {
-        tmp = tmp->next;
-        if (tmp == NULL)
-            return (NULL);
+        new_node->prev = NULL;
+        new_node->next = *h;
+        if (*h != NULL)
+            (*h)->prev = new_node;
+        *h = new_node;
+        return new_node;
     }
 
-    /* If the desired position is at the end, insert at the end of the list. */
-    if (tmp->next == NULL)
-        return (add_dnodeint_end(h, n));
+    /* Traverse the list to find the node at position idx - 1 */
+    temp = *h;
+    for (i = 0; i < idx - 1 && temp != NULL; i++)
+        temp = temp->next;
 
-    /* Allocate memory for the new node. */
-    new = malloc(sizeof(dlistint_t));
-    if (new == NULL)
-        return (NULL);
+    /* If the index is out of bounds, free the new node and return NULL */
+    if (temp == NULL)
+    {
+        free(new_node);
+        return NULL;
+    }
 
-    /* Set the value of the new node and update the links. */
-    new->n = n;
-    new->prev = tmp;
-    new->next = tmp->next;
-    tmp->next->prev = new;
-    tmp->next = new;
+    /* Update pointers to insert the new node */
+    new_node->prev = temp;
+    new_node->next = temp->next;
+    if (temp->next != NULL)
+        temp->next->prev = new_node;
+    temp->next = new_node;
 
-    return (new);
+    return new_node;
 }

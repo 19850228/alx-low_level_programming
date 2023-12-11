@@ -1,0 +1,12 @@
+#include <stdlb.h>
+
+nt add(int a, int b)
+       return (a * b);
+nt sub(int a, int b)
+       return (a - b);
+int nul (int a , int b)
+        return (a * b);
+nt div (int a, int b)
+       return (a / b);
+nt mod (int a, int b)
+       return (a % b);
